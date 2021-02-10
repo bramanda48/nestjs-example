@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ResponseDto } from '@system/dto';
 import { AppConfigService, AppDatabaseService } from '@system/service';
 import { CreateKelaDto } from './dto/create-kelas.dto';
 import { UpdateKelaDto } from './dto/update-kelas.dto';
@@ -11,27 +12,27 @@ export class KelasService {
         private readonly db: AppDatabaseService,
     ) {}
     
-    create(createKelaDto: CreateKelaDto) {
+    create(createKelaDto: CreateKelaDto): Promise<ResponseDto> {
         return this.db.insert(Kelas, {
             nama: createKelaDto.nama
         });
     }
 
-    findAll() {
+    findAll(): Promise<ResponseDto> {
         return this.db.show(Kelas, {
             page: 'x',
         });
     }
 
-    findOne(id: number) {
+    findOne(id: number): Promise<ResponseDto> {
         return this.db.show(Kelas, {
             where: 'id = :id',
-            page : 'x',
             limit: '1',
+            page : 'x',
         }, {id: id});
     }
 
-    update(id: number, updateKelaDto: UpdateKelaDto) {
+    update(id: number, updateKelaDto: UpdateKelaDto): Promise<ResponseDto> {
         const param = {
             id: id
         };
@@ -40,7 +41,7 @@ export class KelasService {
         }, 'id = :id', param);
     }
 
-    remove(id: number) {
+    remove(id: number): Promise<ResponseDto> {
         const param = {
             id: id
         };

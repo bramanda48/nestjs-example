@@ -28,6 +28,9 @@ export class CustomExceptionFilter implements ExceptionFilter {
             case HttpStatus.NOT_FOUND:
                 statusCode = HttpStatus.NOT_FOUND;
             break;
+            case HttpStatus.UNAUTHORIZED:
+                statusCode = HttpStatus.UNAUTHORIZED;
+            break;
         }
 
         //Set message

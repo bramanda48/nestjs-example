@@ -13,7 +13,7 @@ export class SiswaService {
         private readonly db: AppDatabaseService,
     ) {}
     
-    async create(createSiswaDto: CreateSiswaDto): Promise<ResponseDto> {
+    create(createSiswaDto: CreateSiswaDto): Promise<ResponseDto> {
         return this.db.insert(Siswa, {
             id_kelas: createSiswaDto.id_kelas,
             nama: createSiswaDto.nama,
@@ -21,7 +21,7 @@ export class SiswaService {
         });
     }
 
-    async findAll(req: RequestDto): Promise<ResponseDto> {
+    findAll(req: RequestDto): Promise<ResponseDto> {
         return this.db.show(Siswa, {
             field: 'a.id, a.nama, b.nama as nama_kelas, a.tgl_lahir, a.tgl_insert, a.last_update',
             sort : req.sort,
@@ -33,7 +33,7 @@ export class SiswaService {
         });
     }
 
-    async findOne(id: number): Promise<ResponseDto> {
+    findOne(id: number): Promise<ResponseDto> {
         return this.db.show(Siswa, {
             field: 'a.id, a.nama, b.nama as nama_kelas, a.tgl_lahir, a.tgl_insert, a.last_update',
             where: 'a.id = :id',
@@ -45,7 +45,7 @@ export class SiswaService {
         }, {id: id});
     }
 
-    async update(id: number, updateSiswaDto: UpdateSiswaDto): Promise<ResponseDto> {
+    update(id: number, updateSiswaDto: UpdateSiswaDto): Promise<ResponseDto> {
         const param = {
             id: id
         };
@@ -56,7 +56,7 @@ export class SiswaService {
         }, 'id = :id', param);
     }
 
-    async remove(id: number): Promise<ResponseDto> {
+    remove(id: number): Promise<ResponseDto> {
         const param = {
             id: id
         };

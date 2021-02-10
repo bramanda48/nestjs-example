@@ -19,13 +19,17 @@ export class AppConfigService {
 
     get app_debug(): string {
         return this.configService.get<string>('APP_DEBUG');
-    }
-
-    get environment(): string {
-        return this.configService.get<string>('APP_ENV');
-    }    
+    }  
 
     get log_level(): string {
         return this.configService.get<string>('APP_LOG_LEVEL');
+    }
+
+    get jwt_secret(): string {
+        return this.configService.get<string>('JWT_SECRET');
+    }
+
+    get jwt_expires_in(): string {
+        return this.configService.get<string>('JWT_EXPIRES_IN');
     }
 }

@@ -10,13 +10,14 @@ import { AppConfigService } from './app-config.service';
             validationSchema: Joi.object({
                 //App Configuration
                 APP_NAME: Joi.string().default('NestJS'),
-                APP_ENV: Joi.string()
-                    .valid('local', 'development', 'production')
-                    .default('local'),
                 APP_DEBUG: Joi.bool().default(true),
                 APP_LOG_LEVEL: Joi.string().default('debug'),
                 APP_URL: Joi.string().default('http://localhost:3000'),
                 APP_PORT: Joi.number().default(3000),
+
+                //JWT Configuration
+                JWT_SECRET: Joi.string(),
+                JWT_EXPIRES_IN: Joi.string().default('86400s'),
             }),
         }),
     ],

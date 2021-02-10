@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JoinOptionDto, ResponseDto, ResponsePagingDto, SelectOptionDto } from '@system/dto';
+import { exception } from 'console';
 import { EntityManager, EntityRepository, EntityTarget, ObjectLiteral, SelectQueryBuilder } from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
@@ -53,7 +54,7 @@ export class AppDatabaseService {
                 index++;
 
                 if(value.innerJoin) {
-                    const [table, term] = value.leftJoin;
+                    const [table, term] = value.innerJoin;
                     builder = builder.innerJoin(table, String.fromCharCode(97 + index), term);
                 }
                 if(value.leftJoin) {
@@ -75,7 +76,13 @@ export class AppDatabaseService {
         }
         
         //Execute query
-        let output  = (options.join) ? await builder.getRawMany(): await builder.getMany();
+        let output  = (options.field) ? await builder.getRawMany(): await builder.getMany();
+        if(output.length <= 0) {
+            result.success = false;
+            result.message = 'Data not found';
+            result.statusCode = 404;
+            return result;
+        }
         result.data = output;
 
         //Execute query paging
