@@ -37,7 +37,7 @@
 - [x] Custom Response Format
 - [x] Simple Pagination
 - [x] Environment Variable Support
-- [ ] Authentication (JWT)
+- [x] Authentication (JWT)
 - [ ] Logger
 - [ ] Dockerfile
 
